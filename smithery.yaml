@@ -1,0 +1,39 @@
+# Smithery configuration for Jurisprudência TJRJ
+# Schema: https://smithery.ai/docs/build/project-config
+# Remote HTTP MCP — server hosted at https://api.mcp.ai/p_tjrj
+
+name: tjrj-mcp
+displayName: "Jurisprudência TJRJ"
+description: >
+  Pesquise jurisprudência do **TJRJ** direto do Claude, ChatGPT ou do seu agente, em português comum, sem sintaxe de busca jurídica. Cada acórdão vem com órgão julgador, relator, data, o trecho exato que casou a busca e o link oficial para conferência. A mesma conexão alcança outros 16 tribunais, para confrontar o entendimento fluminense com o das cortes superiores. Grátis, sem login, hospedado pela plataforma.
+
+version: 0.1.0
+license: MIT
+homepage: https://github.com/mcp-dir/tjrj-mcp
+repository: https://github.com/mcp-dir/tjrj-mcp
+
+tags:
+  - tjrj
+  - rio-de-janeiro
+  - jurisprudencia
+  - case-law
+  - brazil
+  - tribunal-de-justica
+  - acordaos
+  - read-only
+  - no-auth
+  - free
+
+# Remote HTTP MCP — sem startCommand local (servidor já hospedado)
+startCommand:
+  type: http
+  url: https://api.mcp.ai/p_tjrj
+
+auth:
+  type: oauth2
+  resourceMetadataUrl: https://api.mcp.ai/p_tjrj/.well-known/oauth-protected-resource
+  fallback:
+    type: agent-auth
+    description: >
+      Para clientes sem OAuth 2.1. O agente expõe uma tool authenticate(token).
+      Usuário gera o JWT em https://app.mcp.ai/agent-auth e cola no chat.
